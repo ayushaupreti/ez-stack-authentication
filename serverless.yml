@@ -63,3 +63,7 @@ functions:
       - cognitoUserPool:
           pool: countdown-user-pool
           trigger: VerifyAuthChallengeResponse
+
+resources:
+  # cognito
+  - ${file(resources/cognito-user-pool.yml)}
