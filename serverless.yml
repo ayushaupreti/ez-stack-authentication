@@ -1,0 +1,65 @@
+service: ez-stack-authentication
+
+frameworkVersion: '3'
+
+package:
+  individually: true
+  exclude:
+   - readme.md
+   - .gitignore
+   - lambdas/**
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+
+  environment:
+    USER_POOL_ID: us-east-1_nMl2Znmzc
+    SES_FROM_ADDRESS: no-reply@ayusha.net
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - ses:SendEmail
+      Resource: "*"
+
+functions:
+  authorizer_online:
+    handler: lambdas/authorizer/online.handler
+    description: security authorizer for online cognito access token check
+    package:  
+      include:
+        - lambdas/authorizer/online.js
+  
+  preSignUp:
+    handler: lambdas/cognito/pre-signup.handler
+    description: COGNITO - auto confirm user before signup
+    events:
+      - cognitoUserPool:
+          pool: countdown-user-pool
+          trigger: PreSignUp
+
+  defineAuthChallenge:
+    handler: lambdas/cognito/define-auth-challenge.main
+    description: COGNITO - manage flow of custom auth
+    events:
+      - cognitoUserPool:
+          pool: countdown-user-pool
+          trigger: DefineAuthChallenge
+
+  createAuthChallenge:
+    handler: lambdas/cognito/create-auth-challenge.main
+    description: COGNITO - create and email unique OTP
+    events:
+      - cognitoUserPool:
+          pool: countdown-user-pool
+          trigger: CreateAuthChallenge
+
+  verifyAuthChallengeResponse:
+    handler: lambdas/cognito/verify-auth-challenge-response.main
+    description: COGNITO - check if user entered correct OTP
+    events:
+      - cognitoUserPool:
+          pool: countdown-user-pool
+          trigger: VerifyAuthChallengeResponse
