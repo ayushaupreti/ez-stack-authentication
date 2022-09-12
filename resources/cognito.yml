@@ -1,7 +1,7 @@
 Parameters:
   CognitoUserPool:
     Type: String
-    Default: x
+    Default: us-east-1_nMl2Znmzc
 Resources:
   CognitoUserPoolLagnaPool:
     Type: AWS::Cognito::UserPool
@@ -14,7 +14,7 @@ Resources:
         - email
       EmailConfiguration: 
         EmailSendingAccount: DEVELOPER
-        ReplyToEmailAddress: no-reply@ayusha.net
+        From: no-reply@ayusha.net
         SourceArn:  arn:aws:ses:us-east-1:941536852168:identity/ayusha.net
   CognitoUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
