@@ -1,40 +1,43 @@
+Parameters:
+  CognitoUserPool:
+    Type: String
+    Default: x
 Resources:
   CognitoUserPoolLagnaPool:
     Type: AWS::Cognito::UserPool
     DeletionPolicy: Retain
     Properties:
       # Generate a name based on the stage
-      UserPoolName: ${self:service}-${opt:stage, self:provider.stage}-user-pool
+      UserPoolName: ez-stack-user-pool
       # Set email as an alias
       UsernameAttributes:
         - email
       EmailConfiguration: 
         EmailSendingAccount: DEVELOPER
-        ReplyToEmailAddress: do-not-reply@lagna360.com
-        SourceArn: arn:aws:ses:us-west-2:444242269240:identity/administrator@talksim.com
+        ReplyToEmailAddress: no-reply@ayusha.net
+        SourceArn:  arn:aws:ses:us-east-1:941536852168:identity/ayusha.net
   CognitoUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     DeletionPolicy: Retain
     Properties:
       # Generate an app client name based on the stage
-      ClientName: ${self:service}-${opt:stage, self:provider.stage}-user-pool-client-web
+      ClientName: user-pool-client-web
       SupportedIdentityProviders:
         - COGNITO
-      UserPoolId:
-        Ref: CognitoUserPoolLagnaPool
+      UserPoolId: !Ref CognitoUserPool
       ExplicitAuthFlows:
         - ALLOW_CUSTOM_AUTH
         - ALLOW_REFRESH_TOKEN_AUTH
       GenerateSecret: false
 
 # Print out the Id of the User Pool that is created
-Outputs:
-  UserPoolId:
-    Value:
-      Ref: CognitoUserPoolLagnaPool
-    Export:
-      Name: ${self:provider.stage}-UserPoolId
+# Outputs:
+#   UserPoolId:
+#     Value:
+#       Ref: CognitoUserPool
+#     Export:
+#       Name: UserPoolId
 
-  UserPoolClientId:
-    Value:
-      Ref: CognitoUserPoolClient
+#   UserPoolClientId:
+#     Value:
+#       Ref: CognitoUserPoolClient

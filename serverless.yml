@@ -66,4 +66,4 @@ functions:
 
 resources:
   # cognito
-  - ${file(resources/cognito-user-pool.yml)}
+  - ${file(resources/cognito.yml)}
