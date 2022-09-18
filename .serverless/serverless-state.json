@@ -9,7 +9,11 @@
       "runtime": "nodejs14.x",
       "region": "us-east-1",
       "environment": {
-        "USER_POOL_ID": "us-east-1_nMl2Znmzc",
+        "USER_POOL_ID": [
+          {
+            "Ref": "CognitoUserPool"
+          }
+        ],
         "SES_FROM_ADDRESS": "no-reply@ayusha.net"
       },
       "iamRoleStatements": [
@@ -213,7 +217,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ez-stack-authentication/dev/1662989791048-2022-09-12T13:36:31.048Z/authorizer_online.zip"
+                "S3Key": "serverless/ez-stack-authentication/dev/1663092656414-2022-09-13T18:10:56.414Z/authorizer_online.zip"
               },
               "Handler": "lambdas/authorizer/online.handler",
               "Runtime": "nodejs14.x",
@@ -223,7 +227,9 @@
               "Description": "security authorizer for online cognito access token check",
               "Environment": {
                 "Variables": {
-                  "USER_POOL_ID": "us-east-1_nMl2Znmzc",
+                  "USER_POOL_ID": {
+                    "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"USER_POOL_ID\"]"
+                  },
                   "SES_FROM_ADDRESS": "no-reply@ayusha.net"
                 }
               },
@@ -245,7 +251,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ez-stack-authentication/dev/1662989791048-2022-09-12T13:36:31.048Z/preSignUp.zip"
+                "S3Key": "serverless/ez-stack-authentication/dev/1663092656414-2022-09-13T18:10:56.414Z/preSignUp.zip"
               },
               "Handler": "lambdas/cognito/pre-signup.handler",
               "Runtime": "nodejs14.x",
@@ -255,7 +261,9 @@
               "Description": "COGNITO - auto confirm user before signup",
               "Environment": {
                 "Variables": {
-                  "USER_POOL_ID": "us-east-1_nMl2Znmzc",
+                  "USER_POOL_ID": {
+                    "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"USER_POOL_ID\"]"
+                  },
                   "SES_FROM_ADDRESS": "no-reply@ayusha.net"
                 }
               },
@@ -277,7 +285,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ez-stack-authentication/dev/1662989791048-2022-09-12T13:36:31.048Z/defineAuthChallenge.zip"
+                "S3Key": "serverless/ez-stack-authentication/dev/1663092656414-2022-09-13T18:10:56.414Z/defineAuthChallenge.zip"
               },
               "Handler": "lambdas/cognito/define-auth-challenge.main",
               "Runtime": "nodejs14.x",
@@ -287,7 +295,9 @@
               "Description": "COGNITO - manage flow of custom auth",
               "Environment": {
                 "Variables": {
-                  "USER_POOL_ID": "us-east-1_nMl2Znmzc",
+                  "USER_POOL_ID": {
+                    "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"USER_POOL_ID\"]"
+                  },
                   "SES_FROM_ADDRESS": "no-reply@ayusha.net"
                 }
               },
@@ -309,7 +319,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ez-stack-authentication/dev/1662989791048-2022-09-12T13:36:31.048Z/createAuthChallenge.zip"
+                "S3Key": "serverless/ez-stack-authentication/dev/1663092656414-2022-09-13T18:10:56.414Z/createAuthChallenge.zip"
               },
               "Handler": "lambdas/cognito/create-auth-challenge.main",
               "Runtime": "nodejs14.x",
@@ -319,7 +329,9 @@
               "Description": "COGNITO - create and email unique OTP",
               "Environment": {
                 "Variables": {
-                  "USER_POOL_ID": "us-east-1_nMl2Znmzc",
+                  "USER_POOL_ID": {
+                    "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"USER_POOL_ID\"]"
+                  },
                   "SES_FROM_ADDRESS": "no-reply@ayusha.net"
                 }
               },
@@ -341,7 +353,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/ez-stack-authentication/dev/1662989791048-2022-09-12T13:36:31.048Z/verifyAuthChallengeResponse.zip"
+                "S3Key": "serverless/ez-stack-authentication/dev/1663092656414-2022-09-13T18:10:56.414Z/verifyAuthChallengeResponse.zip"
               },
               "Handler": "lambdas/cognito/verify-auth-challenge-response.main",
               "Runtime": "nodejs14.x",
@@ -351,7 +363,9 @@
               "Description": "COGNITO - check if user entered correct OTP",
               "Environment": {
                 "Variables": {
-                  "USER_POOL_ID": "us-east-1_nMl2Znmzc",
+                  "USER_POOL_ID": {
+                    "$ref": "$[\"service\"][\"provider\"][\"environment\"][\"USER_POOL_ID\"]"
+                  },
                   "SES_FROM_ADDRESS": "no-reply@ayusha.net"
                 }
               },
@@ -366,65 +380,65 @@
               "VerifyAuthChallengeResponseLogGroup"
             ]
           },
-          "AuthorizerUnderscoreonlineLambdaVersionUXu9valYv4i0Njx4SMRibnmgsvdWxCVnxlFTdDKo7U": {
+          "AuthorizerUnderscoreonlineLambdaVersion3neFXqOcmTgQXU1VF80y2t1WCYU8bebXc8wZXkWMSjc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AuthorizerUnderscoreonlineLambdaFunction"
               },
-              "CodeSha256": "Lscw/QFll0+V2pjbTV1W9eZErLqUSKipi5aQvXywI7U=",
+              "CodeSha256": "F85kJApHK5rm/DiXM+igVaW4gCH6CX3kC+fSYWHHdJU=",
               "Description": "security authorizer for online cognito access token check"
             }
           },
-          "PreSignUpLambdaVersionXZ6mXo2gSn6mqV8JfQPpjC6L4PTyFQEAGSFHMbcY74": {
+          "PreSignUpLambdaVersionKNnjwnKUjceQVNYPvcx8pi4f4wZxA0bPIjHbFUZrQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PreSignUpLambdaFunction"
               },
-              "CodeSha256": "Lscw/QFll0+V2pjbTV1W9eZErLqUSKipi5aQvXywI7U=",
+              "CodeSha256": "ruYTqMhMGSDSVSZet0RbxqvcebxC0HYCXRRBpqZpF94=",
               "Description": "COGNITO - auto confirm user before signup"
             }
           },
-          "CreateAuthChallengeLambdaVersionZYreW4PnYn3hZfizjOMsRI464cg4SvLHVy9Deuq58": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "CreateAuthChallengeLambdaFunction"
-              },
-              "CodeSha256": "Lscw/QFll0+V2pjbTV1W9eZErLqUSKipi5aQvXywI7U=",
-              "Description": "COGNITO - create and email unique OTP"
-            }
-          },
-          "VerifyAuthChallengeResponseLambdaVersion1Dp9JFNLnUUXMVXHyyI88pXWw0fuZfrAxL6EswHIY": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "VerifyAuthChallengeResponseLambdaFunction"
-              },
-              "CodeSha256": "Lscw/QFll0+V2pjbTV1W9eZErLqUSKipi5aQvXywI7U=",
-              "Description": "COGNITO - check if user entered correct OTP"
-            }
-          },
-          "DefineAuthChallengeLambdaVersionZJGxQ3Gf7VRlVs9thchBQhYvHW7gR2Rg8fYykhFM7f0": {
+          "DefineAuthChallengeLambdaVersionrq0tX7Pj7pbayYUjdMTl8ZxbXbCCSoHvkbaGCPK1Gk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DefineAuthChallengeLambdaFunction"
               },
-              "CodeSha256": "Lscw/QFll0+V2pjbTV1W9eZErLqUSKipi5aQvXywI7U=",
+              "CodeSha256": "ruYTqMhMGSDSVSZet0RbxqvcebxC0HYCXRRBpqZpF94=",
               "Description": "COGNITO - manage flow of custom auth"
             }
           },
-          "CognitoUserPoolCountdownuserpool": {
+          "CreateAuthChallengeLambdaVersionBK6TycLJlSwZZHTMTCR6l7yiMsj18QLA0njjUdK49ww": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateAuthChallengeLambdaFunction"
+              },
+              "CodeSha256": "ruYTqMhMGSDSVSZet0RbxqvcebxC0HYCXRRBpqZpF94=",
+              "Description": "COGNITO - create and email unique OTP"
+            }
+          },
+          "VerifyAuthChallengeResponseLambdaVersion0FuuwzklWbSgKQkat8uwCGEKLFarq7pjgw5us37SqA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "VerifyAuthChallengeResponseLambdaFunction"
+              },
+              "CodeSha256": "ruYTqMhMGSDSVSZet0RbxqvcebxC0HYCXRRBpqZpF94=",
+              "Description": "COGNITO - check if user entered correct OTP"
+            }
+          },
+          "CognitoUserPoolEzstackuserpool": {
             "Type": "AWS::Cognito::UserPool",
             "Properties": {
-              "UserPoolName": "countdown-user-pool",
+              "UserPoolName": "ez-stack-user-pool",
               "LambdaConfig": {
                 "PreSignUp": {
                   "Fn::GetAtt": [
@@ -459,7 +473,7 @@
               "VerifyAuthChallengeResponseLambdaFunction"
             ]
           },
-          "PreSignUpLambdaPermissionCognitoUserPoolCountdownuserpoolTriggerSourcePreSignUp": {
+          "PreSignUpLambdaPermissionCognitoUserPoolEzstackuserpoolTriggerSourcePreSignUp": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -472,13 +486,13 @@
               "Principal": "cognito-idp.amazonaws.com",
               "SourceArn": {
                 "Fn::GetAtt": [
-                  "CognitoUserPoolCountdownuserpool",
+                  "CognitoUserPoolEzstackuserpool",
                   "Arn"
                 ]
               }
             }
           },
-          "DefineAuthChallengeLambdaPermissionCognitoUserPoolCountdownuserpoolTriggerSourceDefineAuthChallenge": {
+          "DefineAuthChallengeLambdaPermissionCognitoUserPoolEzstackuserpoolTriggerSourceDefineAuthChallenge": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -491,13 +505,13 @@
               "Principal": "cognito-idp.amazonaws.com",
               "SourceArn": {
                 "Fn::GetAtt": [
-                  "CognitoUserPoolCountdownuserpool",
+                  "CognitoUserPoolEzstackuserpool",
                   "Arn"
                 ]
               }
             }
           },
-          "CreateAuthChallengeLambdaPermissionCognitoUserPoolCountdownuserpoolTriggerSourceCreateAuthChallenge": {
+          "CreateAuthChallengeLambdaPermissionCognitoUserPoolEzstackuserpoolTriggerSourceCreateAuthChallenge": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -510,13 +524,13 @@
               "Principal": "cognito-idp.amazonaws.com",
               "SourceArn": {
                 "Fn::GetAtt": [
-                  "CognitoUserPoolCountdownuserpool",
+                  "CognitoUserPoolEzstackuserpool",
                   "Arn"
                 ]
               }
             }
           },
-          "VerifyAuthChallengeResponseLambdaPermissionCognitoUserPoolCountdownuserpoolTriggerSourceVerifyAuthChallengeResponse": {
+          "VerifyAuthChallengeResponseLambdaPermissionCognitoUserPoolEzstackuserpoolTriggerSourceVerifyAuthChallengeResponse": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -529,13 +543,13 @@
               "Principal": "cognito-idp.amazonaws.com",
               "SourceArn": {
                 "Fn::GetAtt": [
-                  "CognitoUserPoolCountdownuserpool",
+                  "CognitoUserPoolEzstackuserpool",
                   "Arn"
                 ]
               }
             }
           },
-          "CognitoUserPoolLagnaPool": {
+          "CognitoUserPoolEzStack": {
             "Type": "AWS::Cognito::UserPool",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -581,7 +595,7 @@
           "AuthorizerUnderscoreonlineLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AuthorizerUnderscoreonlineLambdaVersionUXu9valYv4i0Njx4SMRibnmgsvdWxCVnxlFTdDKo7U"
+              "Ref": "AuthorizerUnderscoreonlineLambdaVersion3neFXqOcmTgQXU1VF80y2t1WCYU8bebXc8wZXkWMSjc"
             },
             "Export": {
               "Name": "sls-ez-stack-authentication-dev-AuthorizerUnderscoreonlineLambdaFunctionQualifiedArn"
@@ -590,16 +604,25 @@
           "PreSignUpLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PreSignUpLambdaVersionXZ6mXo2gSn6mqV8JfQPpjC6L4PTyFQEAGSFHMbcY74"
+              "Ref": "PreSignUpLambdaVersionKNnjwnKUjceQVNYPvcx8pi4f4wZxA0bPIjHbFUZrQ"
             },
             "Export": {
               "Name": "sls-ez-stack-authentication-dev-PreSignUpLambdaFunctionQualifiedArn"
             }
           },
+          "DefineAuthChallengeLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DefineAuthChallengeLambdaVersionrq0tX7Pj7pbayYUjdMTl8ZxbXbCCSoHvkbaGCPK1Gk"
+            },
+            "Export": {
+              "Name": "sls-ez-stack-authentication-dev-DefineAuthChallengeLambdaFunctionQualifiedArn"
+            }
+          },
           "CreateAuthChallengeLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateAuthChallengeLambdaVersionZYreW4PnYn3hZfizjOMsRI464cg4SvLHVy9Deuq58"
+              "Ref": "CreateAuthChallengeLambdaVersionBK6TycLJlSwZZHTMTCR6l7yiMsj18QLA0njjUdK49ww"
             },
             "Export": {
               "Name": "sls-ez-stack-authentication-dev-CreateAuthChallengeLambdaFunctionQualifiedArn"
@@ -608,19 +631,23 @@
           "VerifyAuthChallengeResponseLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "VerifyAuthChallengeResponseLambdaVersion1Dp9JFNLnUUXMVXHyyI88pXWw0fuZfrAxL6EswHIY"
+              "Ref": "VerifyAuthChallengeResponseLambdaVersion0FuuwzklWbSgKQkat8uwCGEKLFarq7pjgw5us37SqA"
             },
             "Export": {
               "Name": "sls-ez-stack-authentication-dev-VerifyAuthChallengeResponseLambdaFunctionQualifiedArn"
             }
           },
-          "DefineAuthChallengeLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
+          "UserPoolId": {
             "Value": {
-              "Ref": "DefineAuthChallengeLambdaVersionZJGxQ3Gf7VRlVs9thchBQhYvHW7gR2Rg8fYykhFM7f0"
+              "Ref": "CognitoUserPool"
             },
             "Export": {
-              "Name": "sls-ez-stack-authentication-dev-DefineAuthChallengeLambdaFunctionQualifiedArn"
+              "Name": "UserPoolId"
+            }
+          },
+          "UserPoolClientId": {
+            "Value": {
+              "Ref": "CognitoUserPoolClient"
             }
           }
         },
@@ -732,7 +759,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "AuthorizerUnderscoreonlineLambdaVersionUXu9valYv4i0Njx4SMRibnmgsvdWxCVnxlFTdDKo7U"
+        "versionLogicalId": "AuthorizerUnderscoreonlineLambdaVersion3neFXqOcmTgQXU1VF80y2t1WCYU8bebXc8wZXkWMSjc"
       },
       "preSignUp": {
         "handler": "lambdas/cognito/pre-signup.handler",
@@ -740,7 +767,7 @@
         "events": [
           {
             "cognitoUserPool": {
-              "pool": "countdown-user-pool",
+              "pool": "ez-stack-user-pool",
               "trigger": "PreSignUp"
             }
           }
@@ -753,7 +780,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "PreSignUpLambdaVersionXZ6mXo2gSn6mqV8JfQPpjC6L4PTyFQEAGSFHMbcY74"
+        "versionLogicalId": "PreSignUpLambdaVersionKNnjwnKUjceQVNYPvcx8pi4f4wZxA0bPIjHbFUZrQ"
       },
       "defineAuthChallenge": {
         "handler": "lambdas/cognito/define-auth-challenge.main",
@@ -761,7 +788,7 @@
         "events": [
           {
             "cognitoUserPool": {
-              "pool": "countdown-user-pool",
+              "pool": "ez-stack-user-pool",
               "trigger": "DefineAuthChallenge"
             }
           }
@@ -774,7 +801,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "DefineAuthChallengeLambdaVersionZJGxQ3Gf7VRlVs9thchBQhYvHW7gR2Rg8fYykhFM7f0"
+        "versionLogicalId": "DefineAuthChallengeLambdaVersionrq0tX7Pj7pbayYUjdMTl8ZxbXbCCSoHvkbaGCPK1Gk"
       },
       "createAuthChallenge": {
         "handler": "lambdas/cognito/create-auth-challenge.main",
@@ -782,7 +809,7 @@
         "events": [
           {
             "cognitoUserPool": {
-              "pool": "countdown-user-pool",
+              "pool": "ez-stack-user-pool",
               "trigger": "CreateAuthChallenge"
             }
           }
@@ -795,7 +822,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateAuthChallengeLambdaVersionZYreW4PnYn3hZfizjOMsRI464cg4SvLHVy9Deuq58"
+        "versionLogicalId": "CreateAuthChallengeLambdaVersionBK6TycLJlSwZZHTMTCR6l7yiMsj18QLA0njjUdK49ww"
       },
       "verifyAuthChallengeResponse": {
         "handler": "lambdas/cognito/verify-auth-challenge-response.main",
@@ -803,7 +830,7 @@
         "events": [
           {
             "cognitoUserPool": {
-              "pool": "countdown-user-pool",
+              "pool": "ez-stack-user-pool",
               "trigger": "VerifyAuthChallengeResponse"
             }
           }
@@ -816,7 +843,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "VerifyAuthChallengeResponseLambdaVersion1Dp9JFNLnUUXMVXHyyI88pXWw0fuZfrAxL6EswHIY"
+        "versionLogicalId": "VerifyAuthChallengeResponseLambdaVersion0FuuwzklWbSgKQkat8uwCGEKLFarq7pjgw5us37SqA"
       }
     },
     "resources": {
@@ -827,7 +854,7 @@
         }
       },
       "Resources": {
-        "CognitoUserPoolLagnaPool": {
+        "CognitoUserPoolEzStack": {
           "Type": "AWS::Cognito::UserPool",
           "DeletionPolicy": "Retain",
           "Properties": {
@@ -861,7 +888,21 @@
           }
         }
       },
-      "Outputs": {}
+      "Outputs": {
+        "UserPoolId": {
+          "Value": {
+            "Ref": "CognitoUserPool"
+          },
+          "Export": {
+            "Name": "UserPoolId"
+          }
+        },
+        "UserPoolClientId": {
+          "Value": {
+            "Ref": "CognitoUserPoolClient"
+          }
+        }
+      }
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
@@ -876,7 +917,7 @@
           "lambdas/**"
         ],
         "artifactsS3KeyDirname": "serverless/ez-stack-authentication/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/ez-stack-authentication/dev/1662989791048-2022-09-12T13:36:31.048Z"
+        "artifactDirectoryName": "serverless/ez-stack-authentication/dev/1663092656414-2022-09-13T18:10:56.414Z"
       },
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
@@ -893,7 +934,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/ez-stack-authentication/dev/1662989791048-2022-09-12T13:36:31.048Z",
+    "artifactDirectoryName": "serverless/ez-stack-authentication/dev/1663092656414-2022-09-13T18:10:56.414Z",
     "artifact": ""
   }
 }

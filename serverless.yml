@@ -15,7 +15,8 @@ provider:
   region: us-east-1
 
   environment:
-    USER_POOL_ID: us-east-1_nMl2Znmzc
+    USER_POOL_ID: 
+      - Ref: CognitoUserPool
     SES_FROM_ADDRESS: no-reply@ayusha.net
 
   iamRoleStatements:
@@ -37,7 +38,7 @@ functions:
     description: COGNITO - auto confirm user before signup
     events:
       - cognitoUserPool:
-          pool: countdown-user-pool
+          pool: ez-stack-user-pool
           trigger: PreSignUp
 
   defineAuthChallenge:
@@ -45,7 +46,7 @@ functions:
     description: COGNITO - manage flow of custom auth
     events:
       - cognitoUserPool:
-          pool: countdown-user-pool
+          pool: ez-stack-user-pool
           trigger: DefineAuthChallenge
 
   createAuthChallenge:
@@ -53,7 +54,7 @@ functions:
     description: COGNITO - create and email unique OTP
     events:
       - cognitoUserPool:
-          pool: countdown-user-pool
+          pool: ez-stack-user-pool
           trigger: CreateAuthChallenge
 
   verifyAuthChallengeResponse:
@@ -61,7 +62,7 @@ functions:
     description: COGNITO - check if user entered correct OTP
     events:
       - cognitoUserPool:
-          pool: countdown-user-pool
+          pool: ez-stack-user-pool
           trigger: VerifyAuthChallengeResponse
 
 resources:

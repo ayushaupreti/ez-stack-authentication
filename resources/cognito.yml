@@ -3,7 +3,7 @@ Parameters:
     Type: String
     Default: us-east-1_nMl2Znmzc
 Resources:
-  CognitoUserPoolLagnaPool:
+  CognitoUserPoolEzStack:
     Type: AWS::Cognito::UserPool
     DeletionPolicy: Retain
     Properties:
@@ -28,16 +28,17 @@ Resources:
       ExplicitAuthFlows:
         - ALLOW_CUSTOM_AUTH
         - ALLOW_REFRESH_TOKEN_AUTH
+        - ALLOW_USER_SRP_AUTH
       GenerateSecret: false
 
-# Print out the Id of the User Pool that is created
-# Outputs:
-#   UserPoolId:
-#     Value:
-#       Ref: CognitoUserPool
-#     Export:
-#       Name: UserPoolId
 
-#   UserPoolClientId:
-#     Value:
-#       Ref: CognitoUserPoolClient
+Outputs:
+  UserPoolId:
+    Value:
+      Ref: CognitoUserPool
+    Export:
+      Name: UserPoolId
+
+  UserPoolClientId:
+    Value:
+      Ref: CognitoUserPoolClient
